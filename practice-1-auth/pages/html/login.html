@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма авторизации для практики автоматизации</title>
+<link rel="stylesheet" href="/pages/login/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Авторизация</h1>
+            <p>Введите ваши учетные данные для входа в систему</p>
+        </div>
+        
+        <div class="form-container">
+            <div id="message" class="message"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Имя пользователя</label>
+                    <input type="text" id="username" name="username" placeholder="Введите имя пользователя" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Запомнить меня</label>
+                </div>
+                
+                <button type="submit" class="submit-btn">Войти</button>
+            </form>
+            
+            <div class="links">
+                <a href="#" id="forgotPassword">Забыли пароль?</a>
+                <p>Нет аккаунта? <a href="#" id="register">Зарегистрироваться</a></p>
+            </div>
+            
+            <div class="demo-credentials">
+                <h3>Данные для тестирования:</h3>
+                <p><strong>Имя пользователя:</strong> testuser</p>
+                <p><strong>Пароль:</strong> password123</p>
+                <p><em>Используйте эти данные для практики автоматизации</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            
+            // Очищаем предыдущие сообщения
+            messageDiv.textContent = '';
+            messageDiv.className = 'message';
+            messageDiv.style.display = 'none';
+            
+            // Простая валидация
+            if (username === 'testuser' && password === 'password123') {
+                messageDiv.textContent = 'Успешный вход! Добро пожаловать, testuser!';
+                messageDiv.className = 'message success';
+                messageDiv.style.display = 'block';
+                
+                // В реальном приложении здесь был бы редирект
+                console.log('Авторизация успешна');
+            } else {
+                messageDiv.textContent = 'Ошибка: Неверное имя пользователя или пароль';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+                
+                // Для демонстрации - показываем успех для любого другого логина
+                if (username && password) {
+                    messageDiv.textContent = `Успешный вход! Добро пожаловать, ${username}!`;
+                    messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
+                    console.log(`Авторизация успешна для пользователя: ${username}`);
+                }
+            }
+        });
+        
+        // Обработчики для ссылок (для демонстрации)
+        document.getElementById('forgotPassword').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('Функция восстановления пароля пока не реализована. Это можно использовать для тестирования кликов по ссылкам.');
+        });
+        
+        document.getElementById('register').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('Функция регистрации пока не реализована. Это можно использовать для тестирования кликов по ссылкам.');
+        });
+    </script>
+</body>
+</html>
